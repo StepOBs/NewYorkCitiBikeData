@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Ages</title>
+        <link rel="stylesheet" href="http://cdn.pydata.org/bokeh/release/bokeh-0.11.0.min.css" type="text/css" />
+        <script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-0.11.0.min.js"></script>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="{{ url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet" media="screen">
+
+        <!-- Custom CSS -->
+        <link href="{{ url_for('static', filename='css/business-frontpage.css')}}" rel="stylesheet" media="screen">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        {{ script | safe }}
+    </head>
+    <body>
+            <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <ul class="nav nav-tabs">
+                        <li><a href="/">Home</a></li>
+                    </ul>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container -->
+        </nav>
+
+        <header class="business-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1>Welcome to my <img src="../static/img/logo.png" alt="Logo" style="width:280px;height:50px;"> Project</h1>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div id="dates" class="tab-pane">
+            <div class="row">
+                <div class="col-sm-4">
+                    <form method="POST" name="dateFilter" onSubmit="return OnSubmitForm();">
+                                    Please select a date range <br>
+                                    Start Date: <input type="date" name="start_date" value={{ d1 }}><br>
+                                    End Date: <input type="date" name="stop_date" value={{ d2 }}><br><br>
+                                    <p>
+                                        <input type="submit" name="submitDateFilter" value="Submit"><br>
+                                    </p>
+                    </form>
+                    <SCRIPT language="JavaScript">
+                        function OnSubmitForm()
+                        {
+                            document.dateFilter.action ="/age";
+                        }
+                    </SCRIPT>
+                </div>
+            </div>
+        </div>
+        <div class='bokeh'>
+            {{ div | safe }}
+        </div>
+        <br><br>
+    </body>
+</html>

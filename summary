@@ -1,0 +1,3 @@
+New York CitiBike Data Visualisation is a web application to give users a visual representation of data obtained from
+www.citibikenyc.com going back to July 2013. Users will be able to view heatmps of stations over time and to view graphs and
+charts of data of their choice. The application is built using Python on the Flask micro-framework using Bokeh for the visualisation.
