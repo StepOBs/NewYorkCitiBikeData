@@ -4,7 +4,7 @@ import time
 import pandas as pd
 
 def get_dataframe(start_date_range, end_date_range):
-    #def get_dataframe():
+    #def get_dataframe()://remove this
     conn = sqlite3.connect('bike_data.db')
     #start_date_month = 7
     start_date_month = start_date_range.month
