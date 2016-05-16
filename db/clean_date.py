@@ -1,7 +1,7 @@
 import csv
 from shutil import move
 from tempfile import NamedTemporaryFile
-with open('/home/stephen/Documents/College/4th Year/4th Year Project/BikeData/2016-01 - Citi Bike trip data.csv', 'rb')\
+with open('/home/stephen/Documents/College/4th Year/4th Year Project/BikeData/2014-09 - Citi Bike trip data.csv', 'rb')\
         as csvfile, NamedTemporaryFile(dir=".", delete=False) as temp:
     w = csv.writer(temp)
     r = csv.reader(csvfile)
@@ -9,6 +9,7 @@ with open('/home/stephen/Documents/College/4th Year/4th Year Project/BikeData/20
     w.writerow(headers)
     for row in r:
         dt = row[1].split('/')
+        #print dt
         dz = dt[2].split(' ')
         if int(dt[0]) < 10:
             dt[0] = '0' + dt[0]
@@ -26,4 +27,4 @@ with open('/home/stephen/Documents/College/4th Year/4th Year Project/BikeData/20
 
         w.writerow(row)
 
-move(temp.name, '/home/stephen/Documents/College/4th Year/4th Year Project/BikeData/2016-01 - Citi Bike trip data.csv')
+move(temp.name, '/home/stephen/Documents/College/4th Year/4th Year Project/BikeData/2014-09 - Citi Bike trip data.csv')

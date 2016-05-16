@@ -8,7 +8,7 @@ from web_app.form_methods import gender_form, date_form, station_form, age_form,
 from web_app.get_dataframe import get_dataframe
 
 @app.route('/tripDuration', methods=['GET', 'POST'])
-def get_trip_duration():
+def get_tripduration():
     hour_or_less_count = 0
     day_or_less_count = 0
     halfday_or_less_count = 0
