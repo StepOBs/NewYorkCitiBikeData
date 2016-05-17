@@ -14,25 +14,26 @@
     <link href="{{ url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet" media="screen">
 
     <!-- Custom CSS -->
-    <link href="{{ url_for('static', filename='css/business-frontpage.css')}}" rel="stylesheet" media="screen">
+    <link href="{{ url_for('static', filename='css/startbootstrap-landing-page-1.0.5/css/landing-page.css')}}"
+          rel="stylesheet" media="screen">
 
 </head>
 
 <body>
     <!-- Image Background Page Header -->
     <!-- Note: The background image is set within the business-casual.css file. -->
-    <header class="business-header">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1>Welcome to my <img src="../static/img/logo.png" alt="Logo" style="width:280px;height:50px;"> Project</h1>
-                </div>
-            </div>
-        </div>
-    </header>
+{#    <header class="intro-header">#}
+{#        <div class="container">#}
+{#            <div class="row">#}
+{#                <div class="col-lg-12">#}
+{#                    <h1>Welcome to my <img src="../static/img/logo.png" alt="Logo" style="width:280px;height:50px;"> Project</h1>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </header>#}
 
     <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <nav class="navbar-brand topnav" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -58,31 +59,38 @@
     <div class="tab-content">
         <div id="intro" class="tab-pane active">
             <div class="row">
-                <div class="col-sm-4">
-                    <p>Talk about website and information and how to use here</p>
+                <div class="col-lg-12">
+                    <div class="intro-message">
+                        <h1>Welcome to my <img src="../static/img/logo.png" alt="Logo" style="width:280px;height:50px;"> Project</h1>
+                        <br>
+                        <p>Talk about website and information and how to use here</p>
+                    </div>
                 </div>
             </div>
         </div>
         <hr>
         <div id="dates" class="tab-pane">
             <div class="row">
-                <div class="col-sm-4">
-                    <form method="POST" name="dateFilter" onSubmit="return OnSubmitForm();">
-                        Please select a date range <br>
-                        Start Date: <input type="date" name="start_date"><br>
-                        End Date: <input type="date" name="stop_date"><br><br>
+                <div class="form">
+                    <div class="col-sm-4">
+                        <form method="POST" name="dateFilter" onSubmit="return OnSubmitForm();">
+                            Please select a date range <br>
+                            Start Date: <input type="date" name="start_date"><br>
+                            End Date: <input type="date" name="stop_date"><br><br>
 
-                        Get chart of:<br>
-                        <input type="radio" name="data" value="time_of_day" > Time of Day<br>
-                        <input type="radio" name="data" value="gender" checked="checked" > Gender<br>
-                        <input type="radio" name="data" value="age"> Age<br>
-                        <input type="radio" name="data" value="trip_durations"> Trip Durations<br>
-                        <input type="radio" name="data" value="user_types"> User Types<br>
-                        <p>
-                            <input type="submit" name="submitDateFilter" onClick="submitButton=this.value" value="Submit"><br>
-                            <input type="submit" name="submit_heatmap" onClick="submitButton=this.value" value="Submit Heatmap"><br>
-                        </p>
-                    </form>
+                            Get chart of:<br>
+                            <input type="radio" name="data" value="time_of_day" > Time of Day<br>
+                            <input type="radio" name="data" value="gender" checked="checked" > Gender<br>
+                            <input type="radio" name="data" value="age"> Age<br>
+                            <input type="radio" name="data" value="trip_durations"> Trip Durations<br>
+                            <input type="radio" name="data" value="user_types"> User Types<br>
+                            <br><p>
+                                <input type="submit" name="submitDateFilter" onClick="submitButton=this.value" value="Submit"><br>
+                                <br>
+                                <input type="submit" name="submit_heatmap" onClick="submitButton=this.value" value="Submit Heatmap"><br>
+                            </p>
+                        </form>
+                    </div>
                 </div>
                 <div class="col-sm-4">
                     <p>Info</p>
@@ -347,9 +355,11 @@
 
         <!-- Footer -->
         <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Author: Stephen O'Beirne 2016</p>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>Author: Stephen O'Beirne 2016</p>
+                    </div>
                 </div>
             </div>
             <!-- /.row -->
