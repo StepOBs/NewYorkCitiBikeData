@@ -15,7 +15,7 @@ with con:
     cur.execute("CREATE TABLE bikes(tripduration, starttime, stoptime, start_station_name,"
                 "start_station_latitude, start_station_longitude, end_station_name,"
                 "end_station_latitude, end_station_longitude, bikeid, usertype, birth_year, gender);")
-    while (year != 16) and (month != 3):
+    while not (year == 2016 and month == 3):
         print 'entered while'
         if month < 10:
             month = '0' + str(month)

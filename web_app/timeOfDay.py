@@ -57,7 +57,6 @@ def get_time_of_day():
 
     print 'entering for loop stop'
     for x in date_series_stop:
-        print 'in for loop stop'
         if daytime > x.time() > morning:
             morning_count_stop += 1
         if evening > x.time() > daytime:

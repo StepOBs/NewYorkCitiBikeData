@@ -16,7 +16,6 @@ def get_user_type():
     start_date_range = datetime.datetime.strptime(request.form['start_date'], "%Y-%m-%d").date()
     end_date_jinja2 = datetime.datetime.strptime(request.form['stop_date'], "%Y-%m-%d").date()
     end_date_range = datetime.datetime.strptime(request.form['stop_date'], "%Y-%m-%d").date()
-    end_date_range += datetime.timedelta(days=1)
 
     date_start = str(start_date_range)
     date_stop = str(end_date_range)

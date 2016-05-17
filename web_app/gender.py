@@ -39,6 +39,7 @@ def get_gender():
     gender_series = df['gender'].values
 
     for x in gender_series:
+        x = int(x)
         if x == 1:
             male_count += 1
         elif x == 2:
