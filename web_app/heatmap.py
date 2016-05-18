@@ -13,16 +13,22 @@ from web_app.get_dataframe import get_dataframe
 def generate_heatmap():
     start_date_range = datetime.datetime.strptime(request.form['start_date'], "%Y-%m-%d").date()
     end_date_range = datetime.datetime.strptime(request.form['stop_date'], "%Y-%m-%d").date()
-    end_date_range += datetime.timedelta(days=1)
 
     df = get_dataframe(start_date_range, end_date_range)
 
-    start_lats = pd.Series(df['start station latitude']).unique()
-    stop_lats = pd.Series(df['end station latitude']).unique()
-    start_long = pd.Series(df['start station longitude']).unique()
-    stop_long = pd.Series(df['end station longitude']).unique()
+    start_lats = pd.Series(df['start_station_latitude']).unique()
+    stop_lats = pd.Series(df['end_station_latitude']).unique()
+    start_long = pd.Series(df['start_station_longitude']).unique()
+    stop_long = pd.Series(df['end_station_longitude']).unique()
 
-    #occurrences = df['start station latitude'].value_counts()
+    small_occurrences = []
+    occurrences = df['start_station_latitude'].value_counts(sort=False)
+    for o in occurrences:
+        o /= 200
+        small_occurrences.append(o)
+
+    for o in small_occurrences:
+        print o
 
     lats = start_lats.tolist() + stop_lats.tolist()
     longs = start_long.tolist() + stop_long.tolist()
@@ -35,10 +41,11 @@ def generate_heatmap():
         data=dict(
             lat=lats,
             lon=longs,
+            sizes=small_occurrences,
         )
     )
 
-    circle = Circle(x="lon", y="lat", size=8, fill_color="blue", fill_alpha=0.8, line_color=None)
+    circle = Circle(x="lon", y="lat", size='sizes', fill_color="black", fill_alpha=1.8, line_color=None)
     plot.add_glyph(source, circle)
     plot.add_tools(PanTool(), WheelZoomTool(), BoxSelectTool(), HoverTool())
     script, div = components(plot)
