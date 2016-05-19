@@ -1,11 +1,12 @@
 import datetime
-
-from bokeh.charts import Bar
+import pandas as pd
+from bokeh.charts import Bar, Line
 from bokeh.embed import components
 from flask import render_template, request
 from web_app.app import app
 from web_app.form_methods import gender_form, date_form, station_form, age_form, time_form
 from web_app.get_dataframe import get_dataframe
+
 
 @app.route('/userType', methods=['GET', 'POST'])
 def get_user_type():
@@ -48,11 +49,17 @@ def get_user_type():
         else:
             unknown_count += 1
     if unknown_count == 0:
-        customer_type = [subscriber_count, customer_count]
+        #customer_type = [subscriber_count, customer_count]
+        df = pd.DataFrame({'Categories': ['Subscriber', 'Customer'],
+                           'Count': [subscriber_count, customer_count]})
+        colors = ["red", "green"]
     else:
-        customer_type = [subscriber_count, customer_count, unknown_count]
-
-    p = Bar(customer_type, title="Bar example", xlabel='categories', ylabel='values', width=400, height=400)
-    script, div = components(p)
+        #customer_type = [subscriber_count, customer_count, unknown_count]
+        df = pd.DataFrame({'Categories': ['Subscriber', 'Customer', 'Null'],
+                           'Count': [subscriber_count, customer_count, unknown_count]})
+        colors = ["red", "green", "blue"]
+    #b = Bar(customer_type, title="Bar example", label='categories', ylabel='values', width=400, height=400)
+    b = Bar(df, title="User Types", label='Categories', values='Count')
+    scriptb, divb = components(b)
     return render_template('userType.html', s=subscriber_count, c=customer_count, u=unknown_count,
-                           d1=date_start, d2=date_stop_jinja2, script=script, div=div)
+                           d1=date_start, d2=date_stop_jinja2, scriptb=scriptb, divb=divb)

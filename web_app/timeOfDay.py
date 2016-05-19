@@ -8,19 +8,29 @@ from web_app.app import app
 from web_app.form_methods import gender_form, date_form, station_form, age_form
 from web_app.get_dataframe import get_dataframe
 
+
 @app.route('/timeOfDay', methods=['GET', 'POST'])
 def get_time_of_day():
-    morning = datetime.datetime(2000, 1, 1, 00, 00, 00).time()
-    daytime = datetime.datetime(2000, 1, 1, 8, 00, 00).time()
+    post_midnight = datetime.datetime(2000, 1, 1, 00, 00, 00).time()
+    morning = datetime.datetime(2000, 1, 1, 04, 00, 00).time()
+    late_morning = datetime.datetime(2000, 1, 1, 8, 00, 00).time()
+    afternoon = datetime.datetime(2000, 1, 1, 12, 00, 00).time()
     evening = datetime.datetime(2000, 1, 1, 16, 00, 00).time()
+    late_evening = datetime.datetime(2000, 1, 1, 20, 00, 00).time()
 
+    post_midnight_count_start = 0
     morning_count_start = 0
-    day_count_start = 0
+    late_morning_count_start = 0
+    afternoon_count_start = 0
     evening_count_start = 0
+    late_evening_count_start = 0
 
-    morning_count_stop = 0
-    day_count_stop = 0
-    evening_count_stop = 0
+    # post_midnight_count_stop = 0
+    # morning_count_stop = 0
+    # late_morning_count_stop = 0
+    # afternoon_count_stop = 0
+    # evening_count_stop = 0
+    # late_evening_count_stop = 0
 
     start_date_range = datetime.datetime.strptime(request.form['start_date'], "%Y-%m-%d").date()
     end_date_jinja2 = datetime.datetime.strptime(request.form['stop_date'], "%Y-%m-%d").date()
@@ -43,30 +53,50 @@ def get_time_of_day():
     if 'submit_age' in request.form:
         df = age_form(df, date_start, date_stop)
 
+    print type(post_midnight)
+    print type(morning)
+    print type(late_morning)
+
     date_series_start = pd.to_datetime(df['start_time1'])
     for x in date_series_start:
-        if daytime > x.time() > morning:
+        if morning > x.time() > post_midnight:
+            post_midnight_count_start += 1
+        elif late_morning > x.time() > morning:
             morning_count_start += 1
-        if evening > x.time() > daytime:
-            day_count_start += 1
-        else:
+        elif afternoon > x.time() > late_morning:
+            late_morning_count_start += 1
+        elif evening > x.time() > afternoon:
+            afternoon_count_start += 1
+        elif late_evening > x.time() > evening:
             evening_count_start += 1
+        else:
+            late_evening_count_start += 1
     print 'exit for loop start'
 
     date_series_stop = pd.to_datetime(df['stoptime'])
 
-    print 'entering for loop stop'
-    for x in date_series_stop:
-        if daytime > x.time() > morning:
-            morning_count_stop += 1
-        if evening > x.time() > daytime:
-            day_count_stop += 1
-        else:
-            evening_count_stop += 1
-    print 'exit for loop stop'
-
-    total = morning_count_stop + day_count_stop + evening_count_stop
-    times = [morning_count_start, day_count_start, evening_count_start]
-    p = Bar(times, title="Journeys per time of day", ylabel='No. of Trips', width=400, height=400)
-    script, div = components(p)
-    return render_template('timeOfDay.html', t=total, d1=date_start, d2=date_stop_jinja2, script=script, div=div)
+    # print 'entering for loop stop'
+    # for x in date_series_stop:
+    #     if post_midnight > x.time() > morning:
+    #         post_midnight_count_stop += 1
+    #     if morning > x.time > late_morning:
+    #         morning_count_stop += 1
+    #     if late_morning > x.time() > afternoon:
+    #         late_morning_count_stop += 1
+    #     if afternoon > x.time() > evening:
+    #         afternoon_count_stop += 1
+    #     if evening > x.time() > late_evening:
+    #         evening_count_stop += 1
+    #     else:
+    #         late_evening_count_stop += 1
+    # print 'exit for loop stop'
+    #total = post_midnight_count_stop + morning_count_stop + evening_count_stop
+    #times = [post_midnight_count_start, morning_count_start, evening_count_start]
+    #p = Bar(times, title="Journeys per time of day", ylabel='No. of Trips', width=400, height=400)
+    df = pd.DataFrame({'Categories': ['00-00 - 04-00', '04-00 - 08-00', '08-00 - 12-00', '12-00 - 16-00',
+                                      '16-00 - 20-00', '20-00 - 00-00'],
+                       'Count': [post_midnight_count_start, morning_count_start, late_morning_count_start,
+                                 afternoon_count_start, evening_count_start, late_evening_count_start]})
+    b = Bar(df, title="Time Of Day", label='Categories', values='Count')
+    scriptb, divb = components(b)
+    return render_template('timeOfDay.html', d1=date_start, d2=date_stop_jinja2, scriptb=scriptb, divb=divb)

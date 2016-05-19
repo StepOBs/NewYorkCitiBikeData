@@ -1,4 +1,5 @@
 import datetime
+import pandas as pd
 from bokeh.charts import Bar
 from bokeh.embed import components
 from flask import render_template, request
@@ -64,11 +65,15 @@ def get_age():
             null += 1
     total = child_count + young_adult_count + mid_age_count + oap_count + null
     if null == 0:
-        ages = [young_adult_count, mid_age_count, oap_count]
+        #ages = [young_adult_count, mid_age_count, oap_count]
+        df = pd.DataFrame({'Categories': ['16-30', '31-65', '65+'],
+                           'Count': [young_adult_count, mid_age_count, oap_count]})
     else:
-        ages = [young_adult_count, mid_age_count, oap_count, null]
-    p = Bar(ages, title="Bar example", xlabel='categories', ylabel='values', width=400, height=400)
-    script, div = components(p)
+        #ages = [young_adult_count, mid_age_count, oap_count, null]
+        df = pd.DataFrame({'Categories': ['16-30', '31-65', '65+', 'Unknown'],
+                           'Count': [young_adult_count, mid_age_count, oap_count, null]})
+    b = Bar(df, title="Age", label='Categories', values='Count')
+    scriptb, divb = components(b)
     return render_template('age.html', n=null, c=child_count, y=young_adult_count,
                            m=mid_age_count, o=oap_count, t=total, d1=date_start,
-                           d2=date_stop_jinja2, script=script, div=div)
+                           d2=date_stop_jinja2, scriptb=scriptb, divb=divb)

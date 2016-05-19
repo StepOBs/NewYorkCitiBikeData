@@ -1,5 +1,5 @@
 import datetime
-
+import pandas as pd
 from bokeh.charts import Bar
 from bokeh.embed import components
 from flask import render_template, request
@@ -48,10 +48,13 @@ def get_gender():
             gender_unknown += 1
     total = male_count + female_count + gender_unknown
     if gender_unknown == 0:
-        genders = [male_count, female_count]
+        #genders = [male_count, female_count]
+        df = pd.DataFrame({'Categories': ['Male', 'Female'],
+                           'Count': [male_count, female_count]})
     else:
-        genders = [male_count, female_count, gender_unknown]
-    p = Bar(genders, title="Bar example", xlabel='categories', ylabel='values', width=400, height=400)
-    script, div = components(p)
+        df = pd.DataFrame({'Categories': ['Male', 'Female', 'Unknown'],
+                           'Count': [male_count, female_count, gender_unknown]})
+    b = Bar(df, title="Gender", label='Categories', values='Count')
+    scriptb, divb = components(b)
     return render_template('gender.html', m=male_count, f=female_count, gu=gender_unknown, t=total,
-                           d1=date_start, d2=date_stop_jinja2, script=script, div=div)
+                           d1=date_start, d2=date_stop_jinja2, scriptb=scriptb, divb=divb)

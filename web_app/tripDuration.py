@@ -1,11 +1,12 @@
 import datetime
-
+import pandas as pd
 from bokeh.charts import Bar
 from bokeh.embed import components
 from flask import render_template, request
 from web_app.app import app
 from web_app.form_methods import gender_form, date_form, station_form, age_form, time_form
 from web_app.get_dataframe import get_dataframe
+
 
 @app.route('/tripDuration', methods=['GET', 'POST'])
 def get_tripduration():
@@ -52,12 +53,19 @@ def get_tripduration():
         else:
             day_or_more_count += 1
     total = halfday_or_less_count + hour_or_less_count + day_or_more_count + day_or_less_count
-
+    print long(hour_or_less_count)
     if day_or_more_count == 0:
-        durations = [hour_or_less_count, halfday_or_less_count, day_or_less_count]
+        #durations = [hour_or_less_count, halfday_or_less_count, day_or_less_count]
+        df = pd.DataFrame({'Categories': ['0-60mins', '1-12hrs', '12-24hrs'],
+                           'Count': [hour_or_less_count, halfday_or_less_count, day_or_less_count]})
     else:
-        durations = [hour_or_less_count, halfday_or_less_count, day_or_less_count, day_or_more_count]
-    p = Bar(durations, title="Bar example", xlabel='categories', ylabel='values', width=400, height=400)
-    script, div = components(p)
+        df = pd.DataFrame({'Categories': ['0-60mins', '1-12hrs', '12-24hrs', '24+hrs'],
+                           'Count': [long(hour_or_less_count), long(halfday_or_less_count), long(day_or_less_count),
+                                     long(day_or_more_count)]})
+        #durations = [hour_or_less_count, halfday_or_less_count, day_or_less_count, day_or_more_count]
+    # p = Bar(durations, title="Bar example", xlabel='categories', ylabel='values', width=400, height=400)
+    b = Bar(df, title="Journey Lengths", label='Categories', values='Count')
+    scriptb, divb = components(b)
     return render_template('tripDuration.html', p1=hour_or_less_count, p2=halfday_or_less_count, p3=day_or_less_count,
-                           p4=day_or_more_count, p5=total, d1=date_start, d2=date_stop_jinja2, script=script, div=div)
+                           p4=day_or_more_count, p5=total, d1=date_start, d2=date_stop_jinja2, scriptb=scriptb,
+                           divb=divb)
