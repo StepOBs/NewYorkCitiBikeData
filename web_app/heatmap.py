@@ -47,6 +47,6 @@ def generate_heatmap():
 
     circle = Circle(x="lon", y="lat", size='sizes', fill_color="blue", fill_alpha=1.8, line_color=None)
     plot.add_glyph(source, circle)
-    plot.add_tools(PanTool(), WheelZoomTool(), BoxSelectTool(), HoverTool())
-    script, div = components(plot)
-    return render_template('heatmap.html', script=script, div=div)
+    plot.add_tools(PanTool(), WheelZoomTool(), BoxSelectTool())
+    scriptb, divb = components(plot)
+    return render_template('heatmap.html', scriptb=scriptb, divb=divb)

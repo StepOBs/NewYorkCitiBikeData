@@ -2,12 +2,63 @@
 <html lang="en">
     <head>
         {% include 'header.html' %}
+        <script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-0.11.0.min.js"></script>
+        {{ scriptb | safe }}
+    </head>
+    <body>
+        {% include 'navigation.html' %}
+        <div class="row">
+            <div class = 'shift'>
+                <div class="col-md-4">
+                    <section id="heatmap">
+                        <div class="container">
+                            Do heatmap
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class='bokeh'>
+                    {{ divb | safe }}
+                </div>
+            </div>
+        </div>
+        <br><br>
 
-        {{ script | safe }}
-  </head>
-  <body>
-  <div class='bokeh'>
-      {{ div | safe }}
-  </div>
+        <br>
+        {% include 'footer.html' %}
     </body>
 </html>
+
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#    <head>#}
+{#        {% include 'header.html' %}#}
+{#        <script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-0.11.0.min.js"></script>#}
+{#        {{ scriptb | safe }}#}
+{#    </head>#}
+{#    <body>#}
+{#        <div class="row">#}
+{#            {% include 'navigation.html' %}#}
+{#            <div class='bokeh'>#}
+{#                    {{ divb | safe }}#}
+{#            </div>#}
+{#        </div>#}
+{#        <br><br>#}
+{#        {% include 'footer.html' %}#}
+{#    </body>#}
+{#</html>#}
+
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#    <head>#}
+{#        {% include 'header.html' %}#}
+{##}
+{#        {{ script | safe }}#}
+{#  </head>#}
+{#  <body>#}
+{#  <div class='bokeh'>#}
+{#      {{ div | safe }}#}
+{#  </div>#}
+{#    </body>#}
+{#</html>#}

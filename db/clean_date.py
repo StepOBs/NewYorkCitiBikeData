@@ -9,7 +9,6 @@ with open('/home/stephen/Documents/College/4th Year/4th Year Project/BikeData/20
     w.writerow(headers)
     for row in r:
         dt = row[1].split('/')
-        #print dt
         dz = dt[2].split(' ')
         if int(dt[0]) < 10:
             dt[0] = '0' + dt[0]

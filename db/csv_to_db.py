@@ -4,13 +4,8 @@ con = lite.connect('bike_data.db')
 con.text_factory = str
 year = 2013
 month = 7
-#db_file = '/home/stephen/Documents/College/4th Year/4th Year Project/BikeData/2016-01 - Citi Bike trip data.csv'
 with con:
     cur = con.cursor()
-    # cur.execute('DROP TABLE IF EXISTS bikes_2016_01')
-    # cur.execute("CREATE TABLE bikes_2016_01(tripduration, starttime, stoptime, start_station_id, start_station_name,"
-    #             "start_station_latitude, start_station_longitude, end_station_id, end_station_name,"
-    #             "end_station_latitude, end_station_longitude, bikeid, usertype, birth_year, gender);")
     cur.execute('DROP TABLE IF EXISTS bikes')
     cur.execute("CREATE TABLE bikes(tripduration, starttime, stoptime, start_station_name,"
                 "start_station_latitude, start_station_longitude, end_station_name,"
@@ -34,10 +29,6 @@ with con:
                             'start_station_name, start_station_latitude, start_station_longitude,'
                             'end_station_name, end_station_latitude, end_station_longitude, bikeid, usertype,'
                             'birth_year, gender) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);', to_db)
-            # cur.executemany('INSERT INTO bikes_2016_01(tripduration, starttime, stoptime, start_station_id,'
-            #                 'start_station_name, start_station_latitude, start_station_longitude, end_station_id,'
-            #                 'end_station_name, end_station_latitude, end_station_longitude, bikeid, usertype, birth_year,'
-            #                 'gender) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);', to_db)
         print month
         if (str(month)[0]) == '0':
             month = str(month)[1]
