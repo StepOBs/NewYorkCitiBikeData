@@ -56,15 +56,16 @@ def get_tripduration():
     print long(hour_or_less_count)
     if day_or_more_count == 0:
         #durations = [hour_or_less_count, halfday_or_less_count, day_or_less_count]
-        df = pd.DataFrame({'Categories': ['0-60mins', '1-12hrs', '12-24hrs'],
-                           'Count': [hour_or_less_count, halfday_or_less_count, day_or_less_count]})
+        df = pd.DataFrame({'Journey Length': ['0-60mins', '1-12hrs', '12-24hrs'],
+                           'Durations': [hour_or_less_count, halfday_or_less_count, day_or_less_count]})
     else:
-        df = pd.DataFrame({'Categories': ['0-60mins', '1-12hrs', '12-24hrs', '24+hrs'],
-                           'Count': [long(hour_or_less_count), long(halfday_or_less_count), long(day_or_less_count),
+        df = pd.DataFrame({'Journey Length': ['0-60mins', '1-12hrs', '12-24hrs', '24+hrs'],
+                           'Durations': [long(hour_or_less_count), long(halfday_or_less_count), long(day_or_less_count),
                                      long(day_or_more_count)]})
         #durations = [hour_or_less_count, halfday_or_less_count, day_or_less_count, day_or_more_count]
     # p = Bar(durations, title="Bar example", xlabel='categories', ylabel='values', width=400, height=400)
-    b = Bar(df, title="Journey Lengths", label='Categories', values='Count')
+    b = Bar(df, title="Journey Lengths", label='Journey Length', values='Durations')
+    b.left[0].formatter.use_scientific = False
     scriptb, divb = components(b)
     return render_template('tripDuration.html', p1=hour_or_less_count, p2=halfday_or_less_count, p3=day_or_less_count,
                            p4=day_or_more_count, p5=total, d1=date_start, d2=date_stop_jinja2, scriptb=scriptb,

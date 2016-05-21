@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include 'header.html' %}
+</head>
+
+<body>
+
+   {% include 'navigation.html' %}
+
+
+
+    <section id="ages">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Age</h2>
+                    <hr class="star-primary">
+                </div>
+            </div>
+
+            <div id="age">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <form method="POST" name="age_submit" onSubmit="return OnSubmitAgeForm();">
+                            Please select age range: Minumum age = 16 <br>
+                            Minimum Age: <input type="number" min="16" max="150" name="start_age"><br>
+                            Maximum Age: <input type="number" min="16" max="150" name="stop_age"><br><br>
+
+                            Please select a date range if required<br>
+                            Start Date: <input type="date" name="start_date"><br>
+                            End Date: <input type="date" name="stop_date"><br><br>
+
+                            Get chart of:<br>
+                            <input type="radio" name="data" value="time_of_day" > Time of Day<br>
+                            <input type="radio" name="data" value="gender" checked="checked" > Gender<br>
+                            <input type="radio" name="data" value="trip_durations"> Trip Durations<br>
+                            <input type="radio" name="data" value="user_types"> User Types<br>
+
+                            <input type="submit" class="btn btn-info" name="submit_age" value="Submit"><br>
+
+                        </form>
+                    </div>
+                    <div class="col-sm-4">
+                        <p>Different info</p>
+                    </div>
+                </div>
+                <SCRIPT language="JavaScript">
+                    function OnSubmitAgeForm()
+                    {
+                        if(document.age_submit.data[0].checked == true)
+                        {
+                        document.age_submit.action ="/timeOfDay";
+                        }
+                        else
+                        if(document.age_submit.data[1].checked == true)
+                        {
+                        document.age_submit.action ="/gender";
+                        }
+                        else
+                        if(document.age_submit.data[2].checked == true)
+                        {
+                        document.age_submit.action ="/tripDuration";
+                        }
+                        else
+                        if(document.age_submit.data[3].checked == true)
+                        {
+                        document.age_submit.action ="/userType";
+                        }
+                    return true;
+                    }
+                </SCRIPT>
+            </div>
+            <!-- /.row -->
+        </div>
+    </section>
+
+
+   {% include 'footer.html' %}
+</body>
+
+</html>

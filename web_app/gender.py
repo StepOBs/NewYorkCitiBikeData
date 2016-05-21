@@ -49,12 +49,13 @@ def get_gender():
     total = male_count + female_count + gender_unknown
     if gender_unknown == 0:
         #genders = [male_count, female_count]
-        df = pd.DataFrame({'Categories': ['Male', 'Female'],
-                           'Count': [male_count, female_count]})
+        df = pd.DataFrame({'Genders': ['Male', 'Female'],
+                           'Gender': [male_count, female_count]})
     else:
-        df = pd.DataFrame({'Categories': ['Male', 'Female', 'Unknown'],
-                           'Count': [male_count, female_count, gender_unknown]})
-    b = Bar(df, title="Gender", label='Categories', values='Count')
+        df = pd.DataFrame({'Genders': ['Male', 'Female', 'Unknown'],
+                           'Gender': [male_count, female_count, gender_unknown]})
+    b = Bar(df, title="Gender", label='Genders', values='Gender')
+    b.left[0].formatter.use_scientific = False
     scriptb, divb = components(b)
     return render_template('gender.html', m=male_count, f=female_count, gu=gender_unknown, t=total,
                            d1=date_start, d2=date_stop_jinja2, scriptb=scriptb, divb=divb)

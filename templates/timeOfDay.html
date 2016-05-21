@@ -1,51 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <title>Time of Day</title>
-        <link rel="stylesheet" href="http://cdn.pydata.org/bokeh/release/bokeh-0.11.0.min.css" type="text/css" />
+        {% include 'header.html' %}
         <script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-0.11.0.min.js"></script>
-
-        <!-- Bootstrap Core CSS -->
-        <link href="{{ url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet" media="screen">
-
-        <!-- Custom CSS -->
-        <link href="{{ url_for('static', filename='css/business-frontpage.css')}}" rel="stylesheet" media="screen">
-
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
         {{ scriptb | safe }}
     </head>
     <body>
-        <div id="dates" class="tab-pane">
-            <div class="row">
-                <div class="col-sm-4">
-                    <form method="POST" name="dateFilter" onSubmit="return OnSubmitForm();">
-                                    Please select a date range <br>
-                                    Start Date: <input type="date" name="start_date" value={{ d1 }}><br>
-                                    End Date: <input type="date" name="stop_date" value={{ d2 }}><br><br>
-                                    <p>
-                                        <input type="submit" name="submitDateFilter" value="Submit"><br>
-                                    </p>
-                    </form>
-                    <SCRIPT language="JavaScript">
-                        function OnSubmitForm()
-                        {
-                            document.dateFilter.action ="/age";
-                        }
-                    </SCRIPT>
+        {% include 'navigation.html' %}
+        <div class="row">
+            <div class = 'shift'>
+                <div class="col-md-4">
+                    <section id="dates">
+                        <div class="container">
+                            <form method="POST" name="dateFilter" onSubmit="return OnSubmitForm();">
+                                            Please select a date range <br>
+                                            Start Date: <input type="date" name="start_date" value={{ d1 }}><br>
+                                            End Date: <input type="date" name="stop_date" value={{ d2 }}><br><br>
+                                            <p>
+                                                <input type="submit" name="submitDateFilter" value="Submit"><br>
+                                            </p>
+                            </form>
+                            <SCRIPT language="JavaScript">
+                                function OnSubmitForm()
+                                {
+                                    document.dateFilter.action ="/timeOfDay";
+                                }
+                            </SCRIPT>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class='bokeh'>
+                    {{ divb | safe }}
                 </div>
             </div>
         </div>
-        <div class='bokeh'>
-            {{ divb | safe }}
-        </div>
         <br><br>
-        {{ t }}
+
+        <br>
+        {% include 'footer.html' %}
     </body>
 </html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include 'header.html' %}
+</head>
+
+<body>
+   {% include 'navigation.html' %}
+
+    <section id="genders">
+        <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h2>Genders</h2>
+                        <hr class="star-primary">
+                    </div>
+                </div>
+
+            <div id="gender">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <form method="POST" name="gender_submit" onSubmit="return OnSubmitGenderForm();">
+                            Please select <gender></gender> <br>
+                                <select name="gender">
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="unknown">Gender Unknown</option>
+                                </select>
+
+                            Please select a date range if required<br>
+                            Start Date: <input type="date" name="start_date"><br>
+                            End Date: <input type="date" name="stop_date"><br><br>
+
+                            Get chart of:<br>
+                            <input type="radio" name="data" value="time_of_day" checked="checked" > Time of Day<br>
+                            <input type="radio" name="data" value="age"> Age<br>
+                            <input type="radio" name="data" value="trip_durations"> Trip Durations<br>
+                            <input type="radio" name="data" value="user_types"> User Types<br>
+
+                            <input type="submit" class="btn btn-info" name="submit_gender" value="Submit"><br>
+                        </form>
+                    </div>
+                    <div class="col-sm-4">
+                        <p>Different info</p>
+                    </div>
+                </div>
+                <SCRIPT language="JavaScript">
+                    function OnSubmitGenderForm()
+                    {
+                        if(document.gender_submit.data[0].checked == true)
+                        {
+                        document.gender_submit.action ="/timeOfDay";
+                        }
+                        else
+                        if(document.gender_submit.data[1].checked == true)
+                        {
+                        document.gender_submit.action ="/age";
+                        }
+                        else
+                        if(document.gender_submit.data[2].checked == true)
+                        {
+                        document.gender_submit.action ="/tripDuration";
+                        }
+                        else
+                        if(document.gender_submit.data[3].checked == true)
+                        {
+                        document.gender_submit.action ="/userType";
+                        }
+                    return true;
+                    }
+                </SCRIPT>
+            </div>
+            <!-- /.row -->
+        </div>
+    </section>
+
+
+   {% include 'footer.html' %}
+</body>
+
+</html>

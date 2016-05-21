@@ -66,13 +66,14 @@ def get_age():
     total = child_count + young_adult_count + mid_age_count + oap_count + null
     if null == 0:
         #ages = [young_adult_count, mid_age_count, oap_count]
-        df = pd.DataFrame({'Categories': ['16-30', '31-65', '65+'],
-                           'Count': [young_adult_count, mid_age_count, oap_count]})
+        df = pd.DataFrame({'Age': ['16-30', '31-65', '65+'],
+                           'Age Group': [young_adult_count, mid_age_count, oap_count]})
     else:
         #ages = [young_adult_count, mid_age_count, oap_count, null]
-        df = pd.DataFrame({'Categories': ['16-30', '31-65', '65+', 'Unknown'],
-                           'Count': [young_adult_count, mid_age_count, oap_count, null]})
-    b = Bar(df, title="Age", label='Categories', values='Count')
+        df = pd.DataFrame({'Age': ['16-30', '31-65', '65+', 'Unknown'],
+                           'Age Group': [young_adult_count, mid_age_count, oap_count, null]})
+    b = Bar(df, title="Age", label='Age', values='Age Group')
+    b.left[0].formatter.use_scientific = False
     scriptb, divb = components(b)
     return render_template('age.html', n=null, c=child_count, y=young_adult_count,
                            m=mid_age_count, o=oap_count, t=total, d1=date_start,

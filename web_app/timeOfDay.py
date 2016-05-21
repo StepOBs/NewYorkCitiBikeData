@@ -75,28 +75,11 @@ def get_time_of_day():
 
     date_series_stop = pd.to_datetime(df['stoptime'])
 
-    # print 'entering for loop stop'
-    # for x in date_series_stop:
-    #     if post_midnight > x.time() > morning:
-    #         post_midnight_count_stop += 1
-    #     if morning > x.time > late_morning:
-    #         morning_count_stop += 1
-    #     if late_morning > x.time() > afternoon:
-    #         late_morning_count_stop += 1
-    #     if afternoon > x.time() > evening:
-    #         afternoon_count_stop += 1
-    #     if evening > x.time() > late_evening:
-    #         evening_count_stop += 1
-    #     else:
-    #         late_evening_count_stop += 1
-    # print 'exit for loop stop'
-    #total = post_midnight_count_stop + morning_count_stop + evening_count_stop
-    #times = [post_midnight_count_start, morning_count_start, evening_count_start]
-    #p = Bar(times, title="Journeys per time of day", ylabel='No. of Trips', width=400, height=400)
-    df = pd.DataFrame({'Categories': ['00-00 - 04-00', '04-00 - 08-00', '08-00 - 12-00', '12-00 - 16-00',
-                                      '16-00 - 20-00', '20-00 - 00-00'],
-                       'Count': [post_midnight_count_start, morning_count_start, late_morning_count_start,
-                                 afternoon_count_start, evening_count_start, late_evening_count_start]})
-    b = Bar(df, title="Time Of Day", label='Categories', values='Count')
+    df = pd.DataFrame({'Time of Day': ['00-00 - 04-00', '04-00 - 08-00', '08-00 - 12-00', '12-00 - 16-00',
+                                       '16-00 - 20-00', '20-00 - 00-00'],
+                       'Time': [post_midnight_count_start, morning_count_start, late_morning_count_start,
+                                afternoon_count_start, evening_count_start, late_evening_count_start]})
+    b = Bar(df, title="Time Of Day", label='Time of Day', values='Time')
+    b.left[0].formatter.use_scientific = False
     scriptb, divb = components(b)
     return render_template('timeOfDay.html', d1=date_start, d2=date_stop_jinja2, scriptb=scriptb, divb=divb)
