@@ -19,64 +19,67 @@
                     <hr class="star-primary">
                 </div>
             </div>
-
-        <div id="stations">
             <div class="row">
                 <div class="col-sm-4">
-                    <form method="POST" name="station_submit" onSubmit="return OnSubmitStationForm();">
-                        Please select stations <br>
-                        Start Station: <input type="text" name="start_Station"><br>
-                        End Station: <input type="text" name="stop_Station"><br><br>
+                    <div id="stations">
+                        <form method="POST" name="station_submit" onSubmit="return OnSubmitStationForm();">
+                            Please select stations <br>
+                            Start Station: <input type="text" name="start_Station"><br>
+                            End Station: <input type="text" name="stop_Station"><br><br>
 
-                        Please select a date range if required<br>
-                        Start Date: <input type="date" name="start_date"><br>
-                        End Date: <input type="date" name="stop_date"><br><br>
+                            Please select a date range if required<br>
+                            Start Date: <input type="date" name="start_date"><br>
+                            End Date: <input type="date" name="stop_date"><br><br>
 
-                        Get chart of:<br>
-                        <input type="radio" name="data" value="time_of_day" > Time of Day<br>
-                        <input type="radio" name="data" value="gender" checked="checked" > Gender<br>
-                        <input type="radio" name="data" value="age"> Age<br>
-                        <input type="radio" name="data" value="trip_durations"> Trip Durations<br>
-                        <input type="radio" name="data" value="user_types"> User Types<br>
+                            Get chart of:<br>
+                            <input type="radio" name="data" value="time_of_day" > Time of Day<br>
+                            <input type="radio" name="data" value="gender" checked="checked" > Gender<br>
+                            <input type="radio" name="data" value="age"> Age<br>
+                            <input type="radio" name="data" value="trip_durations"> Trip Durations<br>
+                            <input type="radio" name="data" value="user_types"> User Types<br>
 
-                        <input type="submit" class="btn btn-info" name="submit_station" value="Submit"><br>
-                    </form>
+                            <input type="submit" class="btn btn-info" name="submit_station" value="Submit"><br>
+                        </form>
+                    </div>
+                    <SCRIPT language="JavaScript">
+                        function OnSubmitStationForm()
+                        {
+                            if(document.station_submit.data[0].checked == true)
+                            {
+                            document.station_submit.action ="/timeOfDay";
+                            }
+                            else
+                            if(document.station_submit.data[1].checked == true)
+                            {
+                            document.station_submit.action ="/gender";
+                            }
+                            else
+                            if(document.station_submit.data[2].checked == true)
+                            {
+                            document.station_submit.action ="/age";
+                            }
+                            else
+                            if(document.station_submit.data[3].checked == true)
+                            {
+                            document.station_submit.action ="/tripDuration";
+                            }
+                            else
+                            if(document.station_submit.data[4].checked == true)
+                            {
+                            document.station_submit.action ="/userType";
+                            }
+                        return true;
+                        }
+                    </SCRIPT>
                 </div>
-                <div class="col-sm-4">
-                    <p>Different info</p>
+                <div class="col-sm-8">
+                    <br>
+                    <br>
+                    <p>There are 500 bike stations</p>
+                    <br>
+                    <p>Across 50 neighbourhoods</p>
                 </div>
             </div>
-            <SCRIPT language="JavaScript">
-                function OnSubmitStationForm()
-                {
-                    if(document.station_submit.data[0].checked == true)
-                    {
-                    document.station_submit.action ="/timeOfDay";
-                    }
-                    else
-                    if(document.station_submit.data[1].checked == true)
-                    {
-                    document.station_submit.action ="/gender";
-                    }
-                    else
-                    if(document.station_submit.data[2].checked == true)
-                    {
-                    document.station_submit.action ="/age";
-                    }
-                    else
-                    if(document.station_submit.data[3].checked == true)
-                    {
-                    document.station_submit.action ="/tripDuration";
-                    }
-                    else
-                    if(document.station_submit.data[4].checked == true)
-                    {
-                    document.station_submit.action ="/userType";
-                    }
-                return true;
-                }
-            </SCRIPT>
-        </div>
         <!-- /.row -->
         </div>
     </section>

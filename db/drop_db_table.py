@@ -4,5 +4,5 @@ con = lite.connect('bike_data.db')
 con.text_factory = str
 with con:
     cur = con.cursor()
-    cur.execute('DROP TABLE IF EXISTS bikes')
+    cur.execute('DROP TABLE bikes')
 con.close()

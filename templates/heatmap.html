@@ -12,7 +12,20 @@
                 <div class="col-md-4">
                     <section id="heatmap">
                         <div class="container">
-                            Do heatmap
+                            <form method="POST" name="dateFilter" onSubmit="return OnSubmitForm();">
+                                Please select a date range <br>
+                                Start Date: <input type="date" name="start_date" value={{ d1 }}><br>
+                                End Date: <input type="date" name="stop_date" value={{ d2 }}><br><br>
+                                <p>
+                                    <input type="submit" name="submitDateFilter" value="Submit"><br>
+                                </p>
+                            </form>
+                            <SCRIPT language="JavaScript">
+                                function OnSubmitForm()
+                                {
+                                    document.dateFilter.action ="/heatmap";
+                                }
+                            </SCRIPT>
                         </div>
                     </section>
                 </div>

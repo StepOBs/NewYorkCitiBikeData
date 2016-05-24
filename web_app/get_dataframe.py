@@ -5,7 +5,7 @@ import pandas as pd
 
 def get_dataframe(start_date_range, end_date_range):
     #def get_dataframe()://remove this
-    conn = sqlite3.connect('bike_data.db')
+    conn = sqlite3.connect('db/bike_data.db')
     #start_date_month = 7
     start_date_month = start_date_range.month
     #start_date_year = 2013
@@ -30,6 +30,7 @@ def get_dataframe(start_date_range, end_date_range):
     if (start_date_month == end_date_month) and (start_date_year == end_date_year):
         print 'same month and year'
         db_file = 'bikes_{}_{}'.format(start_date_year, start_date_month)
+        #db_file = 'bikes_{}_{}'.format(start_date_year, start_date_month)
         df = pd.read_sql_query("SELECT * from " + db_file, conn)
     else:
         print 'diff month and year'

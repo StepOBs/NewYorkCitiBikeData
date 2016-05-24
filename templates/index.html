@@ -4,22 +4,29 @@
     <head>
         {% include 'header.html' %}
     </head>
-
     <body>
         {% include 'navigation.html' %}
         <section id="index">
-            <!-- Page Content -->
+            <!-- Page Content 111-->
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-12">
-                        <h1>Welcome to my <img src="../static/img/logo.png" alt="Logo" style="width:280px;height:50px;"> Project</h1>
+                    <div class="col-sm-5">
+                        <h1>Welcome</h1>
                         <br>
-                        <p>Talk about website and information and how to use here</p>
+                        <p>Here you will be able view bar charts and heatmaps for a vast range of data</p>
+                        <p>relating New York Citi Bike Trips. Please explore the site and using the</p>
+                        <p>navigation bar above</p>
+
+                        <p>More information about the author and the project repo can be found below</p>
+                    </div>
+                    <div class="col-sm-7">
+                        <img src="/static/img/bar chart.png" alt="Bar chart" align="left" width="50%" height="50%">
+                        <img src="/static/img/map plot.png" alt="Map plot" align="left" width="50%" height="50%">
+
                     </div>
                 </div>
             </div>
         </section>
     {% include 'footer.html' %}
     </body>
-
 </html>

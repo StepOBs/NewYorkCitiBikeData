@@ -18,6 +18,8 @@ def get_gender():
     end_date_jinja2 = datetime.datetime.strptime(request.form['stop_date'], "%Y-%m-%d").date()
     end_date_range = datetime.datetime.strptime(request.form['stop_date'], "%Y-%m-%d").date()
 
+    print start_date_range
+
     date_start = str(start_date_range)
     date_stop = str(end_date_range)
     date_stop_jinja2 = str(end_date_jinja2)
@@ -37,7 +39,7 @@ def get_gender():
         df = time_form(df, date_start, date_stop)
 
     gender_series = df['gender'].values
-
+    numb = len(gender_series)
     for x in gender_series:
         x = int(x)
         if x == 1:
@@ -47,6 +49,7 @@ def get_gender():
         else:
             gender_unknown += 1
     total = male_count + female_count + gender_unknown
+    print total
     if gender_unknown == 0:
         #genders = [male_count, female_count]
         df = pd.DataFrame({'Genders': ['Male', 'Female'],

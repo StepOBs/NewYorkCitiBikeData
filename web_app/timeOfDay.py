@@ -25,13 +25,6 @@ def get_time_of_day():
     evening_count_start = 0
     late_evening_count_start = 0
 
-    # post_midnight_count_stop = 0
-    # morning_count_stop = 0
-    # late_morning_count_stop = 0
-    # afternoon_count_stop = 0
-    # evening_count_stop = 0
-    # late_evening_count_stop = 0
-
     start_date_range = datetime.datetime.strptime(request.form['start_date'], "%Y-%m-%d").date()
     end_date_jinja2 = datetime.datetime.strptime(request.form['stop_date'], "%Y-%m-%d").date()
     end_date_range = datetime.datetime.strptime(request.form['stop_date'], "%Y-%m-%d").date()
@@ -58,6 +51,7 @@ def get_time_of_day():
     print type(late_morning)
 
     date_series_start = pd.to_datetime(df['start_time1'])
+    print len(date_series_start)
     for x in date_series_start:
         if morning > x.time() > post_midnight:
             post_midnight_count_start += 1

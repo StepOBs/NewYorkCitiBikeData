@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     {% include 'header.html' %}
 </head>
@@ -19,56 +18,70 @@
                     <hr class="star-primary">
                 </div>
             </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <div id="dates">
+                        <div class="form">
+                            <form method="POST" name="dateFilter" onSubmit="return OnSubmitForm();">
+                                Please select a date range <br>
+                                Start Date: <input type="date" name="start_date" value="dd/mm/yyyy"><br>
+                                End Date: <input type="date" name="stop_date"><br><br>
+                                <div class="btn-group" role="group" aria-label="...">
+{#                                    <input type="submit" class="btn btn-info" name="submitDateFilter" onClick="submitButton=this.value" value="Submit">#}
+                                    <input type="submit" class="btn btn-info" name="submit_heatmap" onClick="submitButton=this.value" value="Submit Heatmap">
+                                </div>
 
-        <div id="dates">
-            <div class="form">
-                <form method="POST" name="dateFilter" onSubmit="return OnSubmitForm();">
-                    Please select a date range <br>
-                    Start Date: <input type="date" name="start_date" value="dd/mm/yyyy"><br>
-                    End Date: <input type="date" name="stop_date"><br><br>
+                                <br><br>Get chart of:<br>
 
-                    Get chart of:<br>
-
-                    <input type="radio" name="data" value="time_of_day" > Time of Day<br>
-                    <input type="radio" name="data" value="gender" checked="checked" > Gender<br>
-                    <input type="radio" name="data" value="age"> Age<br>
-                    <input type="radio" name="data" value="trip_durations"> Trip Durations<br>
-                    <input type="radio" name="data" value="user_types"> User Types<br>
-                    <br>
-                    <div class="btn-group" role="group" aria-label="...">
-                        <input type="submit" class="btn btn-info" name="submitDateFilter" onClick="submitButton=this.value" value="Submit">
-                        <input type="submit" class="btn btn-info" name="submit_heatmap" onClick="submitButton=this.value" value="Submit Heatmap">
+                                <input type="radio" name="data" value="time_of_day" > Time of Day<br>
+                                <input type="radio" name="data" value="gender" checked="checked" > Gender<br>
+                                <input type="radio" name="data" value="age"> Age<br>
+                                <input type="radio" name="data" value="trip_durations"> Trip Durations<br>
+                                <input type="radio" name="data" value="user_types"> User Types<br>
+                                <br>
+                                <div class="btn-group" role="group" aria-label="...">
+                                    <input type="submit" class="btn btn-info" name="submitDateFilter" onClick="submitButton=this.value" value="Submit">
+{#                                    <input type="submit" class="btn btn-info" name="submit_heatmap" onClick="submitButton=this.value" value="Submit Heatmap">#}
+                                </div>
+                            </form>
+                        </div>
+                        <SCRIPT language="JavaScript">
+                            var submitButton;
+                            function OnSubmitForm()
+                            {
+                                if(submitButton == "Submit Heatmap") {
+                                    document.dateFilter.action = "/heatmap"
+                                }
+                                else {
+                                    if (document.dateFilter.data[0].checked == true) {
+                                        document.dateFilter.action = "/timeOfDay";
+                                    }
+                                    else if (document.dateFilter.data[1].checked == true) {
+                                        document.dateFilter.action = "/gender";
+                                    }
+                                    else if (document.dateFilter.data[2].checked == true) {
+                                        document.dateFilter.action = "/age";
+                                    }
+                                    else if (document.dateFilter.data[3].checked == true) {
+                                        document.dateFilter.action = "/tripDuration";
+                                    }
+                                    else if (document.dateFilter.data[4].checked == true) {
+                                        document.dateFilter.action = "/userType";
+                                    }
+                                }
+                                return true;
+                            }
+                        </SCRIPT>
                     </div>
-                </form>
+                </div>
+                <div class="col-sm-9">
+                    <p>On August 1st 2014, 32654 trips were made on Citi Bikes</p>
+                    <br>
+                    <p>On January 24th 2016, New York City was snowed under and no trips were made</p>
+                    <br>
+                    <p>Find out more for yourself</p>
+                </div>
             </div>
-            <SCRIPT language="JavaScript">
-                var submitButton;
-                function OnSubmitForm()
-                {
-                    if(submitButton == "Submit Heatmap") {
-                        document.dateFilter.action = "/heatmap"
-                    }
-                    else {
-                        if (document.dateFilter.data[0].checked == true) {
-                            document.dateFilter.action = "/timeOfDay";
-                        }
-                        else if (document.dateFilter.data[1].checked == true) {
-                            document.dateFilter.action = "/gender";
-                        }
-                        else if (document.dateFilter.data[2].checked == true) {
-                            document.dateFilter.action = "/age";
-                        }
-                        else if (document.dateFilter.data[3].checked == true) {
-                            document.dateFilter.action = "/tripDuration";
-                        }
-                        else if (document.dateFilter.data[4].checked == true) {
-                            document.dateFilter.action = "/userType";
-                        }
-                    }
-                    return true;
-                }
-            </SCRIPT>
-        </div>
         </div>
     </section>
 
