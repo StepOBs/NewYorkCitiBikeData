@@ -5,7 +5,7 @@ from bokeh.embed import components
 from bokeh.models import GMapPlot, GMapOptions, ColumnDataSource, Circle,\
     DataRange1d, PanTool, WheelZoomTool, BoxSelectTool
 from flask import render_template, request
-from web_app.app import app
+from web_app.app import app, df_init
 from web_app.get_dataframe import get_dataframe
 
 
@@ -18,18 +18,17 @@ def generate_heatmap():
                                                 "%Y-%m-%d").date()
 
     #calls method to get Pandas data frame within given date range.
-    df = get_dataframe(start_date_range, end_date_range)
+    #df = get_dataframe(start_date_range, end_date_range)
 
     #reads the data frame and stores the latitudes and longitudes for the
     #start stations and the end stations
-    start_lats = pd.Series(df['start_station_latitude']).unique()
-    start_long = pd.Series(df['start_station_longitude']).unique()
+    start_lats = pd.Series(df_init['start_station_latitude']).unique()
+    start_long = pd.Series(df_init['start_station_longitude']).unique()
 
     small_occurrences = []
-    occurrences = df['start_station_latitude'].value_counts(sort=False)
+    occurrences = df_init['start_station_latitude'].value_counts(sort=False)
+    print len(occurrences)
     minimum = min(occurrences)
-    print 'max:'
-    print (max(occurrences))
 
     #scaling to ensure 'blobs' will always be viewable on the map of NYC
     for o in occurrences:

@@ -3,7 +3,7 @@ import pandas as pd
 from bokeh.charts import Bar
 from bokeh.embed import components
 from flask import render_template, request
-from web_app.app import app
+from web_app.app import app, df_init
 from web_app.form_methods import gender_form, date_form, station_form, age_form, time_form
 from web_app.get_dataframe import get_dataframe
 
@@ -23,23 +23,24 @@ def get_tripduration():
     date_stop = str(end_date_range)
     date_stop_jinja2 = str(end_date_jinja2)
 
-    df = get_dataframe(start_date_range, end_date_range)
+    #df = get_dataframe(start_date_range, end_date_range)
 
     if 'submitDateFilter' in request.form:
-        df = date_form(df, date_start, date_stop)
+        df = date_form(df_init, date_start, date_stop)
 
     if 'submit_station' in request.form:
-        df = station_form(df, date_start, date_stop)
+        df = station_form(df_init, date_start, date_stop)
 
     if 'submit_gender' in request.form:
-        df = gender_form(df, date_start, date_stop)
+        df = gender_form(df_init, date_start, date_stop)
 
     if 'submit_age' in request.form:
-        df = age_form(df, date_start, date_stop)
+        df = age_form(df_init, date_start, date_stop)
 
     if 'submit_time' in request.form:
-        df = time_form(df, date_start, date_stop)
+        df = time_form(df_init, date_start, date_stop)
 
+    df = df_init
     trip_duration_series = df['tripduration'].values
 
     for x in trip_duration_series:

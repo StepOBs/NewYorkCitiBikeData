@@ -14,8 +14,8 @@
                         <div class="container">
                             <form method="POST" name="dateFilter" onSubmit="return OnSubmitForm();">
                                 Please select a date range <br>
-                                Start Date: <input type="date" name="start_date" value={{ d1 }}><br>
-                                End Date: <input type="date" name="stop_date" value={{ d2 }}><br><br>
+                                Start Date: <input type="date" name="start_date" min="2013-10-01" value={{ d1 }}><br>
+                                End Date: <input type="date" name="stop_date" max="2016-01-31" value={{ d2 }}><br><br>
                                 <p>
                                     <input type="submit" name="submitDateFilter" value="Submit"><br>
                                 </p>

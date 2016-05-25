@@ -4,6 +4,7 @@ from datetime import date
 from flask import request
 
 def date_form(df, date_start, date_stop):
+    #subset dataframe with date filters
     if df['starttime'].dtype == object: #removed redundant parentheses
         df['starttime'] = pd.to_datetime(df['starttime'])
     df.index.name = 'starttime'
@@ -12,6 +13,7 @@ def date_form(df, date_start, date_stop):
     return df
 
 def station_form(df, date_start, date_stop):
+    #subset dataframe with date and station filters
     if df['starttime'].dtype == object:
         df['starttime'] = pd.to_datetime(df['starttime'])
 
@@ -31,7 +33,7 @@ def station_form(df, date_start, date_stop):
     return df
 
 def gender_form(df, date_start, date_stop):
-
+    #test this
     #if df['starttime'].dtype == object:
         #print 'changing type'
     df['starttime'] = pd.to_datetime(df['starttime'])
@@ -53,6 +55,7 @@ def gender_form(df, date_start, date_stop):
     return df
 
 def age_form(df, date_start, date_stop):
+    #subset dataframe with date and age
     if df['starttime'].dtype == object:
         #print 'changing type'
         df['starttime'] = pd.to_datetime(df['starttime'])
@@ -78,6 +81,7 @@ def age_form(df, date_start, date_stop):
     return df
 
 def time_form(df, date_start, date_stop):
+    #subset dataframe with time
     #if df['starttime'].dtype == object:
     df['starttime'] = pd.to_datetime(df['starttime'])
     print

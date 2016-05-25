@@ -8,8 +8,6 @@
 
    {% include 'navigation.html' %}
 
-
-
     <section id="dates">
         <div class="container">
             <div class="row">
@@ -24,8 +22,8 @@
                         <div class="form">
                             <form method="POST" name="dateFilter" onSubmit="return OnSubmitForm();">
                                 Please select a date range <br>
-                                Start Date: <input type="date" name="start_date" value="dd/mm/yyyy"><br>
-                                End Date: <input type="date" name="stop_date"><br><br>
+                                Start Date: <input type="date" name="start_date" min="2013-10-01"><br>
+                                End Date: <input type="date" name="stop_date" max="2016-01-31"><br><br>
                                 <div class="btn-group" role="group" aria-label="...">
 {#                                    <input type="submit" class="btn btn-info" name="submitDateFilter" onClick="submitButton=this.value" value="Submit">#}
                                     <input type="submit" class="btn btn-info" name="submit_heatmap" onClick="submitButton=this.value" value="Submit Heatmap">
@@ -85,8 +83,6 @@
         </div>
     </section>
 
-
    {% include 'footer.html' %}
 </body>
-
 </html>

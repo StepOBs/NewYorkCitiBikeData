@@ -3,43 +3,47 @@ import pandas as pd
 from bokeh.charts import Bar
 from bokeh.embed import components
 from flask import render_template, request
-from web_app.app import app
+from web_app.app import app, df_init
 from web_app.form_methods import date_form, station_form, age_form, time_form
 from web_app.get_dataframe import get_dataframe
 
 
 @app.route('/gender', methods=['GET', 'POST'])
 def get_gender():
+    print df_init
     male_count = 0
     female_count = 0
     gender_unknown = 0
 
+    #form inputs
     start_date_range = datetime.datetime.strptime(request.form['start_date'], "%Y-%m-%d").date()
     end_date_jinja2 = datetime.datetime.strptime(request.form['stop_date'], "%Y-%m-%d").date()
     end_date_range = datetime.datetime.strptime(request.form['stop_date'], "%Y-%m-%d").date()
 
     print start_date_range
-
     date_start = str(start_date_range)
     date_stop = str(end_date_range)
     date_stop_jinja2 = str(end_date_jinja2)
-
-    df = get_dataframe(start_date_range, end_date_range)
+    print 'typt'
+    print type(start_date_range)
+    #df = get_dataframe(start_date_range, end_date_range)
 
     if 'submitDateFilter' in request.form:
-        df = date_form(df, date_start, date_stop)
+        df = date_form(df_init, date_start, date_stop)
 
     if 'submit_station' in request.form:
-        df = station_form(df, date_start, date_stop)
+        df = station_form(df_init, date_start, date_stop)
 
     if 'submit_age' in request.form:
-        df = age_form(df, date_start, date_stop)
+        df = age_form(df_init, date_start, date_stop)
 
     if 'submit_time' in request.form:
-        df = time_form(df, date_start, date_stop)
+        df = time_form(df_init, date_start, date_stop)
+    else:
+        df = df_init
 
+    #get gender column into list
     gender_series = df['gender'].values
-    numb = len(gender_series)
     for x in gender_series:
         x = int(x)
         if x == 1:

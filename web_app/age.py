@@ -3,7 +3,7 @@ import pandas as pd
 from bokeh.charts import Bar
 from bokeh.embed import components
 from flask import render_template, request
-from web_app.app import app
+from web_app.app import app, df_init
 from web_app.form_methods import gender_form, date_form, station_form, time_form
 from web_app.get_dataframe import get_dataframe
 
@@ -31,23 +31,26 @@ def get_age():
     date_stop = str(end_date_range)
     date_stop_jinja2 = str(end_date_jinja2)
 
-    df = get_dataframe(start_date_range, end_date_range)
+    #df = get_dataframe(start_date_range, end_date_range)
     # print date_start
     # print date_stop
     if 'submitDateFilter' in request.form:
-        df = date_form(df, date_start, date_stop)
+        df = date_form(df_init, date_start, date_stop)
 
     if 'submit_station' in request.form:
-        df = station_form(df, date_start, date_stop)
+        df = station_form(df_init, date_start, date_stop)
 
     if 'submit_gender' in request.form:
-        df = gender_form(df, date_start, date_stop)
+        df = gender_form(df_init, date_start, date_stop)
 
     if 'submit_time' in request.form:
-        df = time_form(df, date_start, date_stop)
+        df = time_form(df_init, date_start, date_stop)
+    else:
+        df = df_init
 
     age_series = df['birth_year'].values
     #print type(age_series[0])
+    zero_check = 0
     for x in age_series:
         x = str(x)
         if (x != '\N') and (x != '') and (x != 'NaN') and (x != 'nan'):
@@ -57,10 +60,13 @@ def get_age():
                 x = int(x)
             if year - x <= 30:
                 young_adult_count += 1
+                zero_check += 1
             elif year - x <= 65:
                 mid_age_count += 1
+                zero_check += 1
             else:
                 oap_count += 1
+                zero_check += 1
         else:
             null += 1
     total = child_count + young_adult_count + mid_age_count + oap_count + null
@@ -77,4 +83,4 @@ def get_age():
     scriptb, divb = components(b)
     return render_template('age.html', n=null, c=child_count, y=young_adult_count,
                            m=mid_age_count, o=oap_count, t=total, d1=date_start,
-                           d2=date_stop_jinja2, scriptb=scriptb, divb=divb)
+                           d2=date_stop_jinja2, scriptb=scriptb, divb=divb, zero_check=zero_check)
